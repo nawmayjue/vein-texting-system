@@ -1,14 +1,16 @@
-package com.vein.vein.user.repository.jdbc.impl;
+package com.vein.vein.features.user.repository.jdbc.impl;
 
-import com.vein.vein.user.dto.UserResponse;
-import com.vein.vein.user.mapper.UserRowMapper;
-import com.vein.vein.user.repository.jdbc.UserJdbcRepository;
+import com.vein.vein.features.user.dto.UserResponse;
+import com.vein.vein.features.user.mapper.UserRowMapper;
+import com.vein.vein.features.user.repository.jdbc.UserJdbcRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @AllArgsConstructor
+@Repository
 public class UserJdbcRepositoryImpl implements UserJdbcRepository {
     private final static UserRowMapper USER_ROW_MAPPER= new UserRowMapper();
     private final JdbcTemplate jdbctemplate;

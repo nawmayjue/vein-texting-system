@@ -1,4 +1,4 @@
-package com.vein.vein.user.dto;
+package com.vein.vein.features.user.dto;
 
 import lombok.*;
 

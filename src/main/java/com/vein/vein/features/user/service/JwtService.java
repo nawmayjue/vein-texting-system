@@ -1,4 +1,4 @@
-package com.vein.vein.user.service;
+package com.vein.vein.features.user.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

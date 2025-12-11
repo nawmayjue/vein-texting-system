@@ -1,7 +1,7 @@
-package com.vein.vein.user.controller;
+package com.vein.vein.features.user.controller;
 
-import com.vein.vein.user.dto.UserResponse;
-import com.vein.vein.user.service.UserService;
+import com.vein.vein.features.user.dto.UserResponse;
+import com.vein.vein.features.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class UserController {
     public ResponseEntity<?> deleteMapping(
            @PathVariable Long id
     ){
-        userService.deleteById(id);
+        userService.deleteUserById(id);
         return ResponseEntity.ok("User with id " + id + " has been deleted");
     }
 

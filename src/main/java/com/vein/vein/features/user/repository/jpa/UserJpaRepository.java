@@ -1,4 +1,4 @@
-package com.vein.vein.user.repository.jpa;
+package com.vein.vein.features.user.repository.jpa;
 
 import com.vein.vein.shared.data.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

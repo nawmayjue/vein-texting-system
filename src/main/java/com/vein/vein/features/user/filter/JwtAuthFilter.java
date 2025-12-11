@@ -1,13 +1,11 @@
-package com.vein.vein.user.filter;
+package com.vein.vein.features.user.filter;
 
-import com.vein.vein.user.service.JwtService;
-import com.vein.vein.user.service.UserService;
-import com.vein.vein.user.service.impl.UserServiceImpl;
+import com.vein.vein.features.user.service.JwtService;
+import com.vein.vein.features.user.service.impl.UserServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

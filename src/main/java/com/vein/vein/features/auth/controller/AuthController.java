@@ -1,9 +1,9 @@
-package com.vein.vein.user.controller;
+package com.vein.vein.features.auth.controller;
 
-import com.vein.vein.user.dto.AuthRequest;
-import com.vein.vein.user.dto.UserRegisterRequest;
-import com.vein.vein.user.service.JwtService;
-import com.vein.vein.user.service.impl.UserServiceImpl;
+import com.vein.vein.features.user.dto.AuthRequest;
+import com.vein.vein.features.user.dto.UserRegisterRequest;
+import com.vein.vein.features.user.service.JwtService;
+import com.vein.vein.features.user.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PostMapping("/generateToken")
+    @PostMapping("/login")
     public ResponseEntity<String> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
@@ -38,9 +38,6 @@ public class AuthController {
             throw new UsernameNotFoundException("Invalid user request!");
         }
     }
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello World!";
-    }
+
 
 }
