@@ -1,7 +1,6 @@
-package com.vein.vein.user.service;
+package com.vein.vein.features.user.service;
 
-import com.vein.vein.shared.data.model.User;
-import com.vein.vein.user.dto.UserResponse;
+import com.vein.vein.features.user.dto.UserResponse;
 
 import java.util.List;
 

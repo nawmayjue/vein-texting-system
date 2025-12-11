@@ -1,6 +1,6 @@
-package com.vein.vein.user.repository.jdbc;
+package com.vein.vein.features.user.repository.jdbc;
 
-import com.vein.vein.user.dto.UserResponse;
+import com.vein.vein.features.user.dto.UserResponse;
 
 import java.util.List;
 

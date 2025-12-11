@@ -1,12 +1,12 @@
-package com.vein.vein.user.service.impl;
+package com.vein.vein.features.user.service.impl;
 
 import com.vein.vein.shared.data.model.User;
-import com.vein.vein.user.dto.UserRegisterRequest;
-import com.vein.vein.user.dto.UserResponse;
-import com.vein.vein.user.repository.jdbc.UserJdbcRepository;
-import com.vein.vein.user.repository.jpa.UserJpaRepository;
-import com.vein.vein.user.service.UserInfoDetails;
-import com.vein.vein.user.service.UserService;
+import com.vein.vein.features.user.dto.UserRegisterRequest;
+import com.vein.vein.features.user.dto.UserResponse;
+import com.vein.vein.features.user.repository.jdbc.UserJdbcRepository;
+import com.vein.vein.features.user.repository.jpa.UserJpaRepository;
+import com.vein.vein.features.user.service.UserInfoDetails;
+import com.vein.vein.features.user.service.UserService;
 import lombok.AllArgsConstructor;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        if (userJpaRepository.existsById(id)){
+        if (!userJpaRepository.existsById(id)){
             throw new RuntimeException("User with id " + id + " doesn't exist");
         }
 

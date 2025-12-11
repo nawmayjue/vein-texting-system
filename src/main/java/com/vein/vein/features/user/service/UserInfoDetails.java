@@ -1,4 +1,4 @@
-package com.vein.vein.user.service;
+package com.vein.vein.features.user.service;
 
 import com.vein.vein.shared.data.model.User;
 import org.springframework.security.core.GrantedAuthority;

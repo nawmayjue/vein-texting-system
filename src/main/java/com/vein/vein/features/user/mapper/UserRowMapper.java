@@ -1,6 +1,6 @@
-package com.vein.vein.user.mapper;
+package com.vein.vein.features.user.mapper;
 
-import com.vein.vein.user.dto.UserResponse;
+import com.vein.vein.features.user.dto.UserResponse;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ public class UserRowMapper implements RowMapper<UserResponse> {
                 rs.getLong("id"),
                 rs.getString("displayName"),
                 rs.getString("username"),
-                rs.getString("password")
+                rs.getString("email")
         );
     }
 }
