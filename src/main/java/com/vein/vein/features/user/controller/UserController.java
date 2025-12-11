@@ -2,6 +2,7 @@ package com.vein.vein.features.user.controller;
 
 import com.vein.vein.features.user.dto.UserResponse;
 import com.vein.vein.features.user.service.UserService;
+import com.vein.vein.shared.data.dto.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,23 +17,35 @@ public class UserController {
     public final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserResponse>> retrieveAllUsers(){
-        return ResponseEntity.ok(userService.retrieveAllUsers());
+    public ResponseEntity<ApiResponse> retrieveAllUsers(){
+        return ResponseEntity.ok(
+                new ApiResponse(
+                        200,
+                        userService.retrieveAllUsers(),
+                        "Users retrieved successfully"
+                )
+        );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> retrieveUserById(
+    public ResponseEntity<ApiResponse> retrieveUserById(
             @PathVariable Long id
     ){
-        return ResponseEntity.ok(userService.retrieveUserById(id));
+        return ResponseEntity.ok(
+                new ApiResponse(
+                        200,
+                        userService.retrieveUserById(id),
+                        "User retrieved successfully"
+                )
+        );
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMapping(
+    public ResponseEntity<ApiResponse> deleteMapping(
            @PathVariable Long id
     ){
         userService.deleteUserById(id);
-        return ResponseEntity.ok("User with id " + id + " has been deleted");
+        return ResponseEntity.noContent().build();
     }
 
 }

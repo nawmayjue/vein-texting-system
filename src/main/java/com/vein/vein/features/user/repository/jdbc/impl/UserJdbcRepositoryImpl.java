@@ -16,10 +16,10 @@ public class UserJdbcRepositoryImpl implements UserJdbcRepository {
     private final JdbcTemplate jdbctemplate;
 
     private static final String FIND_ALL_QUERY= """
-            SELECT id,username,password,email FROM user
+            SELECT id,username,password,display_name as displayName, email FROM user
             """;
-    private static final String FIND_BY_ID= """
-            SELECT id,username,password,email FROM user WHERE id=?
+    private static final String FIND_BY_ID_QUERY= """
+            SELECT id,username,password,display_name as displayName, email FROM user WHERE id=?
             """;
 
     @Override
@@ -33,7 +33,7 @@ public class UserJdbcRepositoryImpl implements UserJdbcRepository {
     @Override
     public UserResponse findById(Long id) {
         return this.jdbctemplate.queryForObject(
-                FIND_ALL_QUERY,
+                FIND_BY_ID_QUERY,
                 USER_ROW_MAPPER,
                 id
         );

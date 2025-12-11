@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        if (userJpaRepository.existsById(id)){
+        if (!userJpaRepository.existsById(id)){
             throw new RuntimeException("User with id " + id + " doesn't exist");
         }
 

@@ -13,7 +13,7 @@ public class UserRowMapper implements RowMapper<UserResponse> {
                 rs.getLong("id"),
                 rs.getString("displayName"),
                 rs.getString("username"),
-                rs.getString("password")
+                rs.getString("email")
         );
     }
 }
