@@ -3,6 +3,8 @@ package com.vein.vein.shared.data.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="user")
 @AllArgsConstructor
@@ -23,5 +25,8 @@ public class User {
 
     @Column(name="status_id")
     private Integer statusId;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<BlogPost> blogPosts;
 
 }
