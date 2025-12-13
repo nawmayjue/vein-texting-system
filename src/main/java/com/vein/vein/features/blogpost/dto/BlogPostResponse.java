@@ -1,5 +1,6 @@
 package com.vein.vein.features.blogpost.dto;
 
+import com.vein.vein.features.user.dto.UserResponse;
 import lombok.*;
 
 @AllArgsConstructor
@@ -10,4 +11,5 @@ import lombok.*;
 public class BlogPostResponse {
     private Long id;
     private String content;
+    private UserResponse userResponse;
 }
