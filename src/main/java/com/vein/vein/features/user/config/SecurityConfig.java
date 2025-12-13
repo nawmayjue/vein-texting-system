@@ -29,9 +29,23 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable()) // Add this temporarily
                 .authorizeHttpRequests(authz -> authz
-                        // Make ALL endpoints public temporarily for testing
-                        .requestMatchers("/api/vein/auth/**", "/api/v1/vein/**", "/api/v1/vein/blogpost/**").permitAll() // ← CHANGE THIS
-                        .anyRequest().permitAll() // ← AND THIS
+                        // Public endpoints - no authentication required
+                        .requestMatchers("/api/vein/auth/**").permitAll()
+                        .requestMatchers("/api/v1/vein/user/register").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        
+                        // WebSocket endpoints
+                        .requestMatchers("/ws/**").permitAll()
+                        
+                        // Blog post creation requires authentication
+                        .requestMatchers("/api/v1/vein/blogposts").authenticated()
+                        
+                        // Message endpoints require authentication
+                        .requestMatchers("/api/v1/vein/messages/**").authenticated()
+                        
+                        // All other endpoints require authentication
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

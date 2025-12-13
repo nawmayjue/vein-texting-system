@@ -9,5 +9,4 @@ import lombok.*;
 @Builder
 public class CreateBlogPostRequest {
     private String content;
-    private Long userId;
 }

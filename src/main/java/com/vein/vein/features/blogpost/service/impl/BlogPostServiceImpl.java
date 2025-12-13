@@ -18,16 +18,14 @@ public class BlogPostServiceImpl implements BlogPostService {
     private final BlogPostJpaRepository blogPostJpaRepository;
 
     @Override
-    public BlogPostResponse createBlogPost(CreateBlogPostRequest createBlogPostRequest) {
+    public BlogPostResponse createBlogPost(CreateBlogPostRequest createBlogPostRequest, String username) {
 
-        User user = userJpaRepository.findById(createBlogPostRequest.getUserId())
-                .orElseThrow(() -> new RuntimeException("User with id " + createBlogPostRequest.getUserId() + " doesn't exist"));
+        User user = userJpaRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User with username " + username + " doesn't exist"));
 
         BlogPost blogPost = BlogPost.builder()
                 .content(createBlogPostRequest.getContent())
-                .user(
-                        user
-                )
+                .user(user)
                 .build();
 
         BlogPost savedBlogPost = blogPostJpaRepository.save(blogPost);
