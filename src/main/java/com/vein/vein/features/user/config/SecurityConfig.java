@@ -30,8 +30,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.disable()) // Add this temporarily
                 .authorizeHttpRequests(authz -> authz
                         // Make ALL endpoints public temporarily for testing
-                        .requestMatchers("/api/vein/auth/**", "/api/v1/vein/**", "/api/v1/vein/blogpost/**").permitAll() // ← CHANGE THIS
-                        .anyRequest().permitAll() // ← AND THIS
+                        .requestMatchers("/api/vein/auth/**", "/api/v1/vein/**", "/api/v1/vein/blogposts/**", "/api/v1/vein/reacts/**").permitAll()
+                        .anyRequest().permitAll() //
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
