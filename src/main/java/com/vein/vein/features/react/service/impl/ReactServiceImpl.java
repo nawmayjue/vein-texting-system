@@ -4,6 +4,7 @@ import com.vein.vein.features.blogpost.repository.jdbc.BlogPostJdbcRepository;
 import com.vein.vein.features.blogpost.repository.jpa.BlogPostJpaRepository;
 import com.vein.vein.features.react.dto.CreateReactRequest;
 import com.vein.vein.features.react.dto.ReactResponse;
+import com.vein.vein.features.react.dto.UpdateReactRequest;
 import com.vein.vein.features.react.repository.jdbc.ReactJdbcRepository;
 import com.vein.vein.features.react.repository.jpa.ReactJpaRepository;
 import com.vein.vein.features.react.service.ReactService;
@@ -40,6 +41,10 @@ public class ReactServiceImpl implements ReactService {
                 ()-> new RuntimeException("Cannot find blogpost with id " + createReactRequest.getBlogPostId() )
         );
 
+        if(reactJpaRepository.existsByBlogPost_IdAndReactUser_Id(blogPost.getId(), user.getId())){
+            throw new RuntimeException("You can't react to a post more than once");
+        }
+
         if(blogPost.getUser().getId().equals(user.getId())){
             throw new RuntimeException("You can't react to your own post");
         }
@@ -75,6 +80,14 @@ public class ReactServiceImpl implements ReactService {
 
     @Override
     public void deleteReactById(Long id) {
+        if(!reactJpaRepository.existsById(id)){
+            throw new RuntimeException("React with id " + id + " doesn't exist");
+        }
+        reactJpaRepository.deleteById(id);
+    }
 
+    @Override
+    public void updateBlogId(UpdateReactRequest updateReactRequest, Long id) {
+        reactJdbcRepository.updateReactBlogId(updateReactRequest.getBlogPostId(), id);
     }
 }

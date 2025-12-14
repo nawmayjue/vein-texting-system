@@ -23,12 +23,16 @@ public class ReactJdbcRepositoryImpl implements ReactJdbcRepository {
         u.username AS username,
         u.email AS userEmail,
         r.blog_post_id AS blogPostId
-        FROM react r
-        JOIN user u ON u.id=r.user_id
+        FROM reacts r
+        JOIN user u ON u.id=r.react_user_id
+    """;
+
+    private static final String UPDATE_BLOG_ID_QUERY = """
+        UPDATE reacts SET blog_post_id=? WHERE id=?
     """;
 
     private static final String FIND_ALL_QUERY = BASE_QUERY;
-    private static final String FIND_BY_ID_QUERY = BASE_QUERY + " WHERE id=?";
+    private static final String FIND_BY_ID_QUERY = BASE_QUERY + " WHERE r.id=?";
 
     @Override
     public List<ReactResponse> findAll() {
@@ -44,6 +48,15 @@ public class ReactJdbcRepositoryImpl implements ReactJdbcRepository {
                 FIND_BY_ID_QUERY,
                 REACT_ROW_MAPPER,
                 id
+        );
+    }
+
+    @Override
+    public void updateReactBlogId(Long id, Long blogId) {
+        this.jdbcTemplate.update(
+                UPDATE_BLOG_ID_QUERY,
+                id,
+                blogId
         );
     }
 }
