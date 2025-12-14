@@ -14,9 +14,9 @@ public class ReactRowMapper implements RowMapper<ReactResponse> {
                 rs.getLong("reactId"),
                 new UserResponse(
                         rs.getLong("userId"),
-                        rs.getString("displayName"),
+                        rs.getString("userDisplayName"),
                         rs.getString("username"),
-                        rs.getString("email")
+                        rs.getString("userEmail")
                 ),
                 rs.getLong("blogPostId")
         );

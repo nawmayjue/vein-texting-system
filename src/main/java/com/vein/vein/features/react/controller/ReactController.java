@@ -2,6 +2,7 @@ package com.vein.vein.features.react.controller;
 
 import com.vein.vein.features.react.dto.CreateReactRequest;
 import com.vein.vein.features.react.dto.ReactResponse;
+import com.vein.vein.features.react.dto.UpdateReactRequest;
 import com.vein.vein.features.react.service.ReactService;
 import com.vein.vein.features.user.dto.UserResponse;
 import com.vein.vein.shared.data.dto.ApiResponse;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-@RequestMapping
+@RequestMapping("/api/v1/vein/reacts")
 @RestController
 @AllArgsConstructor
 public class ReactController {
@@ -56,6 +57,40 @@ public class ReactController {
                         200,
                         reactService.retrieveReactById(id),
                         "React All retrieved successfully"
+                )
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse> deleteReactById(
+      @PathVariable Long id
+    ){
+        reactService.deleteReactById(id);
+        try {
+            return ResponseEntity.noContent().build();
+        }catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(
+                    new ApiResponse(
+                            HttpStatus.NOT_FOUND.value(),
+                            null,
+                            e.getMessage()
+                    )
+            );
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> updateReact(
+            @PathVariable Long id,
+            @RequestBody UpdateReactRequest updateReactRequest
+            ){
+        reactService.updateBlogId(updateReactRequest, id);
+
+        return ResponseEntity.ok().body(
+                new ApiResponse(
+                        200,
+                        reactService.retrieveReactById(id),
+                        "Updated react successfully!"
                 )
         );
     }

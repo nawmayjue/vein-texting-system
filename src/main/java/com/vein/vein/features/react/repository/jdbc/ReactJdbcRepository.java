@@ -8,5 +8,6 @@ import java.util.List;
 public interface ReactJdbcRepository {
     List<ReactResponse> findAll();
     ReactResponse findById(Long id);
+    void updateReactBlogId(Long blogId, Long id);
 
 }
