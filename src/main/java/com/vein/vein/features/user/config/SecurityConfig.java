@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // Make ALL endpoints public temporarily for testing
                         .requestMatchers("/api/vein/auth/**", "/api/v1/vein/**", "/api/v1/vein/blogposts/**", "/api/v1/vein/reacts/**").permitAll()
+                        .requestMatchers("/ws/**").permitAll()
                         .anyRequest().permitAll() //
                 )
                 .sessionManagement(session -> session
